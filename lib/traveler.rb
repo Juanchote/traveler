@@ -6,5 +6,5 @@ require "traveler/traveler"
 require "traveler/cli"
 
 module Traveler
-  Cli.start
+  #Cli.start
 end
