@@ -8,7 +8,11 @@ module Traveler
     # [returns]
     # * @cities => Array of Cities
     def self.init_cities name, url
-      @cities = Traveler::FileTools.parse url
+      begin
+        @cities = Traveler::FileTools.parse url
+      rescue e
+        STDOUT.write "Error parseando fichero\n"
+      end
       starting_city name
       @cities
     end
