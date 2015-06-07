@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jm.rodulfo.salcedo@gmail.com"]
 
   spec.summary       = %q{Traveler Salesman Problem}
-  spec.homepage      = "git@github.com:Juanchote/traveler.git"
+  spec.homepage      = "https://github.com/Juanchote/traveler.git"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
