@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby -wU
+require 'traveler'
+
+Traveler::Cli.start ( ARGV )

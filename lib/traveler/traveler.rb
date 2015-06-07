@@ -18,9 +18,9 @@ module Traveler
     # [params]
     # * name => Starting city
     def self.nearest_neighbour name='Beijing', url='cities.txt'
-      init_cities name, url
       @visited_cities = []
-      city = starting_city name
+      init_cities name, url
+      city = @first_city
       while (city = @cities.delete(city.nearest_city)) do
         @visited_cities << city
       end
@@ -33,15 +33,14 @@ module Traveler
     # * name => Starting city
     # * url => File to load
     def self.held_karp name='Beijing', url='cities.txt'
-      start_time = Time.now
       init_cities name, url
       perms = @cities.permutation(@cities.size).each_slice(1000)
 
       threads, moar_perms = [], []
       perms.first(5000).each do |perm|
-        threads << Thread.new(perm) do |perm|
-          moar_perms << perm.map do |p|
-            [p, travel_to(p)]
+        threads << Thread.new(perm) do |p|
+          moar_perms << p.map do |t|
+            [t, travel_to(t)]
           end.min_by { |c| c.last }
         end
       end
@@ -51,7 +50,6 @@ module Traveler
       @visited_cities.concat(moar_perms.min_by{ |c| c[1] }.first)
 
       print_visited_cities
-      puts "#{Time.now - start_time}"
     end
 
     # Returns cities
